@@ -1,3 +1,3 @@
 exports.render = function(req, res) {
-    res.send('index');
+    res.send('index.html');
 };
