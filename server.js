@@ -1,7 +1,9 @@
 var port = 1337;
+
+var express=require('express');
 var mongoose = require('mongoose');
-var express = require('express');
-var app = express();
+var app=express();
+
 var http = require('http');
 var server = http.createServer(app);
 
@@ -15,13 +17,11 @@ mongoose.connect(configDB.url, function(error) {
 });
 
 app.set('views', __dirname + '/app/views');
-	app.engine('html', require('ejs').renderFile);
-	
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'ejs');
+app.use(express.static('./public'));
 
-require('./app/routes/routes.js')(app, server); 
-
-
-
+require('./app/routes/routes.js')(app);
 
 server.listen(port);
  
