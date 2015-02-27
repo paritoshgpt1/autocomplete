@@ -1,65 +1,25 @@
 <html>
 <head>
-<title>Hello World!</title>
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<title>Autocomplete</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script  type="text/javascript" src="js/typeahead.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('input.typeahead').typeahead({
+        name: 'words',
+        minLength: 3,
+        remote: '/search?word=%QUERY',
+        limit: 10
+    });
+});
+</script>
+<link rel="stylesheet" href="css/custom.css">
 </head>
 <body>
-<h1>Hello there!</h1>
-<p>Start entering words in the textbox below.</p>
-<input type="text" placeholder="Enter here" id="input_word" name="input_word">
-<p>
-	<span id="result"></span>
-
-<script>
-$(function () {
-  $('#input_word').on('keyup',function(){
-
-  		var length = $("#input_word").val().length;
-  		var input_value = $("#input_word").val();
-  		if(length>=3)
-  		{
-  			$("#result").html("");
-  			console.log("Inside the if statement");
-       		$.ajax({
-            url: "/search",
-            type: "GET",
-            data: "word="+input_value,  
-            success: function (data) {
-              	
-              	console.log(data);
-              	
-              	$.each(data, function(index, value) {
-              		$("#result").append("<br>Word: "+value.def);
-              	});
-               	
-               }
-            }); 
-         }
-         else
-         	$("#result").html("");
-         
-         /*
-         // set an onFocus event to show the result on input field when result is focused
-         focus: function (event, ui) { 
-            this.value = ui.item.label; 
-            // Prevent other event from not being execute
-            event.preventDefault();
-         },
-         select: function (event, ui) {
-            // Prevent value from being put in the input:
-            this.value = ui.item.label;
-            // Set the id to the next input hidden field
-            $(this).next("input").val(ui.item.value); 
-            // Prevent other event from not being execute            
-            event.preventDefault();
-            // optionnal: submit the form after field has been filled up
-            $('#quicksearch').submit();
-         }
-         */
-  });
-});
-
-
-</script>
+  <h3>Welcome to Autocomplete in Node.js</h3>
+  <p>Start searching in the textbox below.</p>
+  <div class="bs-example">
+    <input type="text" name="typeahead" class="typeahead tt-query" autocomplete="off" spellcheck="false" placeholder="Type here">
+  </div>
 </body>
 </html>
