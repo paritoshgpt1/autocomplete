@@ -1,3 +1,3 @@
 module.exports = {
-		'url' : 'mongodb://localhost/dictionary' 
+		'url' : 'mongodb://paritoshgpt1:mongodb@ds049641.mongolab.com:49641/dictionary'
 };
